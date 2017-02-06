@@ -1,0 +1,72 @@
+{% extends "base.html" %}
+{% load bootstrap_pagination %}
+
+
+{% load i18n %}
+
+{% block title %} AlmaBaseGames List {% endblock %}
+
+{% block css %}
+	
+{% endblock %}
+
+{% block content %}
+	
+	<div class="row">
+		{% for game in games_list %}
+
+			<div class="col-md-6">
+				<div class="panel panel-info">
+				  <div class="panel-heading">{{ game.title }}</div>
+				  <div class="panel-body">
+				  	<div class="row">
+				  		<div class="col-xs-4 col-sm-4"><img alt="Image" class="img-responsive" src="/static/assets/images/paisley.png"></div>
+				  		<div class="col-xs-7 col-sm-7">
+				  			<div style="margin-top: -14px; margin-left: -4px;">
+				  				<h3>{{ game.title }}</h3>
+				  				<h5>{{ game.genre }}</h3>
+				  			</div>
+				  		</div>
+				  		<div class="col-xs-1 col-sm-1">
+				  			<div>
+				  				<span class="{% if game.editors_choice == 1 %} glyphicon glyphicon-star {% endif %}"></span>
+				  			</div>
+				  		</div>
+				  		
+				  	</div>	
+				  </div>
+				  <div class="panel-footer">{{ game.genre }}<span style="float: right;" >{{ game.score }}</span></div>
+				</div>
+			</div>
+
+		{% endfor %}	
+
+	</div>
+
+	<div class="text-center">
+		
+		{% if is_paginated %}
+	    <div class="pagination">
+	        <span class="page-links">
+	            {% if page_obj.has_previous %}
+	                <a href="/games/list?page={{ page_obj.previous_page_number }} disabled">previous</a>
+	            {% else %}
+	            	<a href="#">Previous</a>   
+	            {% endif %}
+	            
+	            <span class="page-current">
+	                Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+	            </span>
+
+	            {% if page_obj.has_next %}
+	                <a href="/games/list?page={{ page_obj.next_page_number }}">Next</a>
+	            {% else %}
+	            	<a href="#">Next</a>    
+	            {% endif %}
+	        </span>
+	    </div>
+	{% endif %}    
+
+	</div>
+	
+{% endblock %}
