@@ -3,11 +3,20 @@
 <html>
   
   <head>
-   	<title>Almabase Games</title> 
+   	<title>{% block title %} {% endblock %}</title>
     <meta charset = "utf-8">
     <meta http-equiv = "X-UA-Compatible" content = "IE = edge">
     <meta name = "viewport" content = "width = device-width, initial-scale = 1">
 	{% bootstrap_css %}
+	<link rel="stylesheet" src="/static/css/main.css" />
+	<style>
+		{% block css %}{% endblock %}	
+	</style>
+	{% bootstrap_javascript jquery=1 %}
+	<script src="/static/js/jquery-3.1.1.min.js" type="text/javascript" charset="utf-8" async defer>
+		{% block header_js %}{% endblock %}	
+	</script>
+
 	{% bootstrap_javascript %}
   </head>
   <body>
@@ -15,8 +24,27 @@
       <h1>My First Bootstrap Page</h1>
       <p>Resize this responsive page to see the effect!</p> 
     </div>
-
+    
     <div class="container">
+		<div class="row">
+	        <div class="col-md-12">
+	    		<form class="form-horizontal">
+		    		<div id="custom-search-input">
+		                <div class="input-group col-md-12">
+		                    <input type="text" class="form-control input-lg" placeholder="Search" />
+		                    <span class="input-group-btn">
+		                        <button class="btn btn-info btn-lg" type="button">
+		                            <i class="glyphicon glyphicon-search"></i>
+		                        </button>
+		                    </span>
+		                </div>
+		            </div>
+	            </form>
+	        </div>
+		</div>		
+	</div>
+
+    <!-- <div class="container">
       <div class="row">
         <div class="col-sm-4">
           <h3>Column 1</h3>
@@ -51,8 +79,13 @@
     <li><a href="#">Menu 2</a></li>
     <li><a href="#">Menu 3</a></li>
   </ul>
-</div>
+</div> -->
 
+	<div class="container">
+		{% block content %}
+		{% endblock %}		
+	</div>
+	
   
   </body>
 
